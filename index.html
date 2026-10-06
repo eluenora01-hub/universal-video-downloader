@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Universal Video Downloader</title>
+
+    <meta
+        name="description"
+        content="Universal Video Downloader - analyze supported video links and download available qualities."
+    >
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+
+            <a href="#" class="brand">
+
+                <div class="brand-icon">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+
+                        <path
+                            d="M8 5.5L18 12L8 18.5V5.5Z"
+                            fill="currentColor"
+                        />
+
+                    </svg>
+
+                </div>
+
+                <span>Universal Video Downloader</span>
+
+            </a>
+
+
+            <nav class="desktop-nav">
+
+                <a href="#home">Home</a>
+
+                <a href="#how-it-works">
+                    How it works
+                </a>
+
+                <a href="#faq">
+                    FAQ
+                </a>
+
+            </nav>
+
+
+            <!-- Mobile menu button -->
+
+            <button
+                class="mobile-menu-btn"
+                id="mobileMenuBtn"
+                aria-label="Open menu"
+            >
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+        </div>
+
+
+        <!-- Mobile menu -->
+
+        <div
+            class="mobile-menu"
+            id="mobileMenu"
+        >
+
+            <a href="#home">Home</a>
+
+            <a href="#how-it-works">
+                How it works
+            </a>
+
+            <a href="#faq">
+                FAQ
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main id="home">
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+
+            <div class="hero-badge">
+
+                <span class="badge-dot"></span>
+
+                FAST • SIMPLE • NO SIGN UP
+
+            </div>
+
+
+            <h1>
+
+                Download Videos
+
+                <span>
+                    Your Way.
+                </span>
+
+            </h1>
+
+
+            <p class="subtitle">
+
+                Paste a supported video link and get
+                the available video information,
+                quality and download options in seconds.
+
+            </p>
+
+
+            <!-- URL BOX -->
+
+            <div class="url-box">
+
+
+                <div class="url-input-wrapper">
+
+                    <svg
+                        class="link-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                    >
+
+                        <path
+                            d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+                        />
+
+                        <path
+                            d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+                        />
+
+                    </svg>
+
+
+                    <input
+                        id="videoUrl"
+                        type="url"
+                        placeholder="Paste video URL here..."
+                        autocomplete="off"
+                    />
+
+                </div>
+
+
+                <button
+    type="button"
+    id="analyzeBtn"
+    class="analyze-btn"
+>
+
+
+                    Analyze
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div
+                id="statusArea"
+                class="status-area"
+            >
+
+                <p id="status" class="status"></p>
+
+
+                <!-- Analysis progress -->
+
+                <div
+                    id="progressBox"
+                    class="progress-box hidden"
+                >
+
+                    <div class="progress-top">
+
+                        <span>
+                            Analyzing video...
+                        </span>
+
+                        <span id="progressPercent">
+                            0%
+                        </span>
+
+                    </div>
+
+
+                    <div class="progress-track">
+                        <div id="progressText">0%</div>
+
+                        <div
+                            id="progressBar"
+                            class="progress-bar"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             RESULT
+        ========================== -->
+
+        <section
+            id="result"
+            class="result hidden"
+        >
+
+
+            <div class="result-card">
+
+
+                <!-- Thumbnail only -->
+
+                <div class="thumbnail-wrapper">
+
+                    <img
+                        id="videoThumbnail"
+                        class="video-thumbnail"
+                        src=""
+                        alt="Video thumbnail"
+                    >
+
+
+                    <div
+                        id="thumbnailPlaceholder"
+                        class="thumbnail-placeholder"
+                    >
+
+                        <div class="thumbnail-play">
+
+                            ▶
+
+                        </div>
+
+                        <span>
+                            Video preview
+                        </span>
+
+                    </div>
+
+
+                    <div class="thumbnail-overlay"></div>
+
+
+                    <div class="detected-label">
+
+                        ✓ Video detected
+
+                    </div>
+
+                </div>
+
+
+                <!-- Video information -->
+
+                <div class="video-info">
+
+
+                    <div class="video-heading">
+
+                        <h2 id="videoTitle">
+                            Video detected
+                        </h2>
+
+                        <p id="videoMeta">
+                            Waiting for video information...
+                        </p>
+
+                    </div>
+
+
+                    <div class="quality-section">
+
+                        <h3>
+                            Available Quality
+                        </h3>
+
+
+                        <div
+                            id="qualityList"
+                            class="quality-list"
+                        ></div>
+
+                    </div>
+
+
+                   <button
+    type="button"
+    id="downloadBtn"
+    class="download-btn"
+
+
+                    >
+
+                        Download Video
+
+                        <span>
+                            ↓
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             HOW IT WORKS
+        ========================== -->
+
+        <section
+            id="how-it-works"
+            class="info-section"
+        >
+
+            <div class="section-heading">
+
+                <span>
+                    HOW IT WORKS
+                </span>
+
+                <h2>
+                    Simple from start to finish.
+                </h2>
+
+            </div>
+
+
+            <div class="steps">
+
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Paste
+                    </h3>
+
+                    <p>
+                        Paste a supported public video
+                        URL into the input box.
+                    </p>
+
+                </div>
+
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Analyze
+                    </h3>
+
+                    <p>
+                        Our resolver checks the link
+                        and retrieves available information.
+                    </p>
+
+                </div>
+
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Download
+                    </h3>
+
+                    <p>
+                        Choose an available quality
+                        and download the video.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             FAQ
+        ========================== -->
+
+        <section
+            id="faq"
+            class="info-section faq-section"
+        >
+
+            <div class="section-heading">
+
+                <span>
+                    FAQ
+                </span>
+
+                <h2>
+                    Frequently asked questions.
+                </h2>
+
+            </div>
+
+
+            <div class="faq-list">
+
+
+                <details>
+
+                    <summary>
+                        Do I need to create an account?
+                    </summary>
+
+                    <p>
+                        No. The planned service is designed
+                        to work without user registration.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Which video qualities are available?
+                    </summary>
+
+                    <p>
+                        Available qualities will depend
+                        on the source video.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Can I use it on mobile?
+                    </summary>
+
+                    <p>
+                        Yes. The website is designed to be
+                        responsive for phones, tablets and PCs.
+                    </p>
+
+                </details>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <p>
+            © 2026 Universal Video Downloader
+        </p>
+
+    </footer>
+
+
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
